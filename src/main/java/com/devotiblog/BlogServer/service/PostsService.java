@@ -16,5 +16,23 @@ public class PostsService {
         return post;
     }
 
+    public Post delete(String postId){
+        Post post = new Post(); // TODO: Build post properly later
+        // TODO: more logic here
+        return post;
+    }
+
+    public Post update(String postId, String postBody){
+        Post post = new Post(); // TODO: Build post properly later
+        // TODO: more logic here
+        return post;
+    }
+
+    public Post get(String postId){
+        Post post = new Post(); // TODO: Build post properly later
+        // TODO: more logic here
+        return post;
+    }
+
 
 }
