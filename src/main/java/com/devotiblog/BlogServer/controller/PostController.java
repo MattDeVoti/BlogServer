@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/devotiblog/posts")
-public class UserController {
+public class PostController {
 
     private final PostsService postsService;
 
