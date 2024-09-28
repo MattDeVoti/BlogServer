@@ -36,5 +36,4 @@ public class PostController {
     public Post getPost(@PathVariable String postId){
         return postsService.get(postId);
     }
-
 }

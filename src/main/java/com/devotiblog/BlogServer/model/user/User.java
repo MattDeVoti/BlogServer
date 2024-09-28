@@ -23,5 +23,4 @@ public class User {
 
     // Ids of all communities that this user has created
     String[] createdCommunityIds;
-
 }

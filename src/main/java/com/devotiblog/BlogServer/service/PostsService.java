@@ -33,6 +33,4 @@ public class PostsService {
         // TODO: more logic here
         return post;
     }
-
-
 }
