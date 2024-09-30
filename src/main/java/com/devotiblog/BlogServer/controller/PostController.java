@@ -2,6 +2,7 @@ package com.devotiblog.BlogServer.controller;
 
 import com.devotiblog.BlogServer.model.post.Post;
 import com.devotiblog.BlogServer.service.PostsService;
+import com.mongodb.client.result.DeleteResult;
 import lombok.RequiredArgsConstructor;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
@@ -15,20 +16,20 @@ public class PostController {
 
     @RequestMapping(method = RequestMethod.POST, value="createPost/{communityId}/{postId}/")
     @Operation(summary = "Create new post", description = "Creates a new post")
-    public Post createNewPost(@PathVariable String communityId, @PathVariable String postId, @RequestBody String postBody){
-        return postsService.create(communityId, postId, postBody);
+    public Post createNewPost(@PathVariable String communityId, @PathVariable String postId, @RequestBody Post request){
+        return postsService.create(communityId, postId, request);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value="deletePost/{postId}/")
     @Operation(summary = "Delete a post", description = "Deletes a post")
-    public Post createNewPost(@PathVariable String postId){
+    public DeleteResult createNewPost(@PathVariable String postId){
         return postsService.delete(postId);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value="updatePost/{postId}/")
     @Operation(summary = "Update a post", description = "Updates a post")
-    public Post updatePost(@PathVariable String postId, @RequestBody String postBody){
-        return postsService.update(postId, postBody);
+    public Post updatePost(@PathVariable String postId, @RequestBody Post request){
+        return postsService.update(postId, request);
     }
 
     @RequestMapping(method = RequestMethod.GET, value="getPost/{postId}/")
