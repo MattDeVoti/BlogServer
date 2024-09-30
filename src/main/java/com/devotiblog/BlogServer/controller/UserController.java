@@ -38,4 +38,16 @@ public class UserController {
     public User getUser(@PathVariable String userId){
         return userService.get(userId);
     }
+
+    @RequestMapping(method = RequestMethod.PUT, value="addUserToCommunity/{userId}/{communityId}/{asMod}")
+    @Operation(summary = "Add user to a community", description = "Adds a user to a community")
+    public User addToCommunity(@PathVariable String userId, @PathVariable String communityId, @PathVariable boolean asMod){
+        return userService.addToCommunity(userId, communityId, asMod);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value="removeUserFromCommunity/{userId}/{communityId}/{asMod}")
+    @Operation(summary = "Remove user from a community", description = "Removes a user from a community")
+    public User removeFromCommunity(@PathVariable String userId, @PathVariable String communityId, @PathVariable boolean asMod){
+        return userService.removeFromCommunity(userId, communityId, asMod);
+    }
 }
