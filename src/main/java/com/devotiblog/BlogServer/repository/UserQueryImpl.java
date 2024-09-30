@@ -23,10 +23,10 @@ public class UserQueryImpl implements UserQuery{
     public User updateUser(User user){
         Query query = new Query(where("userId").is(user.getUserId()));
         Update update = new Update();
+
         update.set("userId", user.getUserId());
         update.set("email", user.getEmail());
-        // TODO: Add new community
-        // TODO: Add new moderator of community
+
         return mongoTemplate.findAndModify(query, update, new FindAndModifyOptions().returnNew(true), User.class);
     }
 
@@ -34,5 +34,25 @@ public class UserQueryImpl implements UserQuery{
     public DeleteResult removeUser(String userId){
         Query query = new Query(where("userId").is(userId));
         return mongoTemplate.remove(query, User.class);
+    }
+
+    @Override
+    public User addUserToCommunity(String userId, String communityId, String communityRole){
+        Query query = new Query(where("userId").is(userId));
+        Update update = new Update();
+
+        update.push(communityRole, communityId);
+
+        return mongoTemplate.findAndModify(query, update, new FindAndModifyOptions().returnNew(true), User.class);
+    }
+
+    @Override
+    public User removeUserFromCommunity(String userId, String communityId, String communityRole){
+        Query query = new Query(where("userId").is(userId));
+        Update update = new Update();
+
+        update.pull(communityRole, communityId);
+
+        return mongoTemplate.findAndModify(query, update, new FindAndModifyOptions().returnNew(true), User.class);
     }
 }

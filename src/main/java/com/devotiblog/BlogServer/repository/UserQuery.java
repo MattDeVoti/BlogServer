@@ -8,4 +8,6 @@ public interface UserQuery {
 
     User updateUser(User user);
     DeleteResult removeUser(String userId);
+    User addUserToCommunity(String userId, String communityId, String communityRole);
+    User removeUserFromCommunity(String userId, String communityId, String communityRole);
 }

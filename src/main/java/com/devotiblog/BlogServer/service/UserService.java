@@ -53,6 +53,35 @@ public class UserService {
         return user;
     }
 
+    public User addToCommunity(String userId, String communityId, boolean asMod){
+        validation(userId, communityId);
+
+        String communityField = asMod ? "moderatorOfCommunityIds" : "memberOfCommunityIds";
+
+        User user = userRepository.addUserToCommunity(userId, communityId, communityField);
+        log.debug("Added user with userId {} to communityId {}", user.getUserId(), communityId);
+        return user;
+    }
+
+    public User removeFromCommunity(String userId, String communityId, boolean asMod){
+        validation(userId, communityId);
+
+        String communityField = asMod ? "moderatorOfCommunityIds" : "memberOfCommunityIds";
+
+        User user = userRepository.removeUserFromCommunity(userId, communityId, communityField);
+        log.debug("Removed user with userId {} from communityId {}", user.getUserId(), communityId);
+        return user;
+    }
+
+    public void validation(String userId, String communityId){
+        if(userId.isBlank()){
+            throw new BadRequestException("userId cannot be null");
+        }
+        if(communityId.isBlank()){
+            throw new BadRequestException("communityId in UserService cannot be null");
+        }
+    }
+
     public User validation(String userId, User request){
         if(userId.isBlank()){
             throw new BadRequestException("userId cannot be null");
