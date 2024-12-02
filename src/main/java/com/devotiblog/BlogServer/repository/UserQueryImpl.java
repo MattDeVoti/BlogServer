@@ -24,7 +24,7 @@ public class UserQueryImpl implements UserQuery{
         Query query = new Query(where("userId").is(user.getUserId()));
         Update update = new Update();
 
-        update.set("userId", user.getUserId());
+        update.set("userName", user.getUserName());
         update.set("email", user.getEmail());
 
         return mongoTemplate.findAndModify(query, update, new FindAndModifyOptions().returnNew(true), User.class);
