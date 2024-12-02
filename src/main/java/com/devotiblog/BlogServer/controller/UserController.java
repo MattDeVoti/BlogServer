@@ -15,25 +15,25 @@ public class UserController {
 
     private final UserService userService;
 
-    @RequestMapping(method = RequestMethod.POST, value="createUser/{userId}/")
+    @RequestMapping(method = RequestMethod.POST, value="createUser/{userId}")
     @Operation(summary = "Create new user", description = "Creates a new user")
     public User createNewUser(@PathVariable String userId, @RequestBody User request){
         return userService.create(userId, request);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value="deleteUser/{userId}/")
+    @RequestMapping(method = RequestMethod.DELETE, value="deleteUser/{userId}")
     @Operation(summary = "Delete a user", description = "Deletes a user")
     public DeleteResult createNewUser(@PathVariable String userId){
         return userService.delete(userId);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value="updateUser/{userId}/")
+    @RequestMapping(method = RequestMethod.PUT, value="updateUser/{userId}")
     @Operation(summary = "Update a user", description = "Updates a user")
     public User updateUser(@PathVariable String userId, @RequestBody User request){
         return userService.update(userId, request);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value="getUser/{userId}/")
+    @RequestMapping(method = RequestMethod.GET, value="getUser/{userId}")
     @Operation(summary = "Retrieve a user", description = "Retrieves a user")
     public User getUser(@PathVariable String userId){
         return userService.get(userId);

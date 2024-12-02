@@ -7,7 +7,6 @@ import com.mongodb.client.result.DeleteResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.modelmapper.ModelMapper;
 
 import java.util.List;
 
@@ -16,7 +15,6 @@ import java.util.List;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    private final ModelMapper modelMapper;
 
     public User create(String userId, User request){
         User user = validation(userId, request);

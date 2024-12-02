@@ -2,6 +2,7 @@ package com.devotiblog.BlogServer.repository;
 
 import com.devotiblog.BlogServer.model.community.Community;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
 import java.util.List;
 
