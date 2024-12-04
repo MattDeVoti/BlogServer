@@ -23,7 +23,7 @@ public class CommunityQueryImpl implements CommunityQuery{
     public Community updateCommunity(Community community){
         Query query = new Query(where("communityId").is(community.getCommunityId()));
         Update update = new Update();
-        update.set("communityId", community.getCommunityId());
+        update.set("communityName", community.getCommunityName());
         update.set("communityDescription", community.getCommunityDescription());
         return mongoTemplate.findAndModify(query, update, new FindAndModifyOptions().returnNew(true), Community.class);
     }

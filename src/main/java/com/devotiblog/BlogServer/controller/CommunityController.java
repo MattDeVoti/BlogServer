@@ -15,25 +15,25 @@ public class CommunityController {
 
     private final CommunityService communityService;
 
-    @RequestMapping(method = RequestMethod.POST, value="createUser/{communityId}")
+    @RequestMapping(method = RequestMethod.POST, value="createCommunity/{communityId}")
     @Operation(summary = "Create new community", description = "Creates a new community")
     public Community createNewCommunity(@PathVariable String communityId, @RequestBody Community request){
         return communityService.create(communityId, request);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value="deleteUser/{communityId}")
+    @RequestMapping(method = RequestMethod.DELETE, value="deleteCommunity/{communityId}")
     @Operation(summary = "Delete a community", description = "Deletes a community")
     public DeleteResult createNewCommunity(@PathVariable String communityId){
         return communityService.delete(communityId);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value="updateUser/{communityId}")
+    @RequestMapping(method = RequestMethod.PUT, value="updateCommunity/{communityId}")
     @Operation(summary = "Update a community", description = "Updates a community")
     public Community updateCommunity(@PathVariable String communityId, @RequestBody Community request){
         return communityService.update(communityId, request);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value="getUser/{communityId}")
+    @RequestMapping(method = RequestMethod.GET, value="getCommunity/{communityId}")
     @Operation(summary = "Retrieve a community", description = "Retrieves a community")
     public Community getCommunity(@PathVariable String communityId){
         return communityService.get(communityId);

@@ -23,7 +23,6 @@ public class PostQueryImpl implements PostQuery{
     public Post updatePost(Post post){
         Query query = new Query(where("postId").is(post.getPostId()));
         Update update = new Update();
-        update.set("postId", post.getCommunityId());
         update.set("postBody", post.getPostBody());
         // TODO: update number of likes
         return mongoTemplate.findAndModify(query, update, new FindAndModifyOptions().returnNew(true), Post.class);
