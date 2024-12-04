@@ -43,6 +43,10 @@ public class UserQueryImpl implements UserQuery{
 
         update.push(communityRole, communityId);
 
+        if(communityRole.equals("moderatorOfCommunityIds")){
+            update.push("memberOfCommunityIds", communityId);
+        }
+
         return mongoTemplate.findAndModify(query, update, new FindAndModifyOptions().returnNew(true), User.class);
     }
 
@@ -52,6 +56,10 @@ public class UserQueryImpl implements UserQuery{
         Update update = new Update();
 
         update.pull(communityRole, communityId);
+
+        if(communityRole.equals("memberOfCommunityIds")){
+            update.pull("moderatorOfCommunityIds", communityId);
+        }
 
         return mongoTemplate.findAndModify(query, update, new FindAndModifyOptions().returnNew(true), User.class);
     }
