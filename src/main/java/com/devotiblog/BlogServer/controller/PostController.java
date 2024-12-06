@@ -38,15 +38,9 @@ public class PostController {
         return postsService.get(postId);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value="addLike/{postId}/{userId}")
-    @Operation(summary = "Add new like to a post", description = "Adds a new like to a post based on postId and userId")
-    public Post addLikeToPost(@PathVariable String postId, @PathVariable String userId){
-        return postsService.addLike(postId, userId);
-    }
-
-    @RequestMapping(method = RequestMethod.PUT, value="removeLike/{postId}/{userId}")
-    @Operation(summary = "Remove like from a post", description = "Removes a like from a post based on postId and userId")
-    public Post removeLikeFromPost(@PathVariable String postId, @PathVariable String userId){
-        return postsService.removeLike(postId, userId);
+    @RequestMapping(method = RequestMethod.PUT, value="updateLikes/{postId}/{userId}")
+    @Operation(summary = "Adds or removes like to or from a post", description = "Adds or removes a new like to or from a post based on postId and userId")
+    public Post updateLikes(@PathVariable String postId, @PathVariable String userId){
+        return postsService.updateLikes(postId, userId);
     }
 }
