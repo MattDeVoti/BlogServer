@@ -76,6 +76,7 @@ public class PostsService {
             throw new BadRequestException("postBody cannot be null");
         }
         request.setPostId(postId);
+        request.setCommunityId(communityId);
         return request;
     }
 
