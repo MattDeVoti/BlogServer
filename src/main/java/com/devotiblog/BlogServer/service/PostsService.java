@@ -26,12 +26,14 @@ public class PostsService {
         return post;
     }
 
-    public DeleteResult delete(String postId){
+    public Post delete(String postId){
         validation(postId);
 
-        DeleteResult result = postRepository.removePost(postId);
-        log.debug("Post deleted successfully : {}", result.wasAcknowledged());
-        return result;
+        Post post = get(postId);
+        post = changeToDeletedPost(post);
+
+        post = postRepository.updatePost(post);
+        return post;
     }
 
     public Post update(String postId, Post request){
@@ -62,6 +64,13 @@ public class PostsService {
             post = postRepository.removeLikeOnPost(postId, userId);
             log.debug("User {} unliked post {}", userId, postId);
         }
+        return post;
+    }
+
+    private Post changeToDeletedPost(Post post){
+        post.setPostBody("DELETED");
+        post.setPosterId("DELETED");
+
         return post;
     }
 
