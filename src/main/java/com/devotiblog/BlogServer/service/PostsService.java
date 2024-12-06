@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+
 @RequiredArgsConstructor
 @Slf4j
 @Service
@@ -52,7 +54,12 @@ public class PostsService {
     public Post addLike(String postId, String userId){
         validation(postId, userId);
 
-        Post post = postRepository.addLikeOnPost(postId, userId);
+        Post post = postRepository.findByPostId(postId).get(0);
+        if(!Arrays.asList(post.getLikedIds()).contains(userId)) {
+            post = postRepository.addLikeOnPost(postId, userId);
+        } else {
+            throw new BadRequestException("User " + userId + " liked post " + postId);
+        }
         log.debug("User {} liked post {}", userId, postId);
         return post;
     }
