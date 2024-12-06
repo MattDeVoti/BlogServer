@@ -24,7 +24,22 @@ public class PostQueryImpl implements PostQuery{
         Query query = new Query(where("postId").is(post.getPostId()));
         Update update = new Update();
         update.set("postBody", post.getPostBody());
-        // TODO: update number of likes
+        return mongoTemplate.findAndModify(query, update, new FindAndModifyOptions().returnNew(true), Post.class);
+    }
+
+    @Override
+    public Post addLikeOnPost(String postId, String likedId){
+        Query query = new Query(where("postId").is(postId));
+        Update update = new Update();
+        update.push("likedIds", likedId);
+        return mongoTemplate.findAndModify(query, update, new FindAndModifyOptions().returnNew(true), Post.class);
+    }
+
+    @Override
+    public Post removeLikeOnPost(String postId, String likedId){
+        Query query = new Query(where("postId").is(postId));
+        Update update = new Update();
+        update.pull("likedIds", likedId);
         return mongoTemplate.findAndModify(query, update, new FindAndModifyOptions().returnNew(true), Post.class);
     }
 

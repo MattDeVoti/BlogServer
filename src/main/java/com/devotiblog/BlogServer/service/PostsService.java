@@ -49,6 +49,22 @@ public class PostsService {
         return post;
     }
 
+    public Post addLike(String postId, String userId){
+        validation(postId, userId);
+
+        Post post = postRepository.addLikeOnPost(postId, userId);
+        log.debug("User {} liked post {}", userId, postId);
+        return post;
+    }
+
+    public Post removeLike(String postId, String userId){
+        validation(postId, userId);
+
+        Post post = postRepository.removeLikeOnPost(postId, userId);
+        log.debug("User {} unliked post {}", userId, postId);
+        return post;
+    }
+
     public Post validation(String communityId, String postId, Post request){
         if(communityId.isBlank()){
             throw new BadRequestException("communityId in post validation cannot be null");
@@ -77,6 +93,15 @@ public class PostsService {
     public void validation(String postId){
         if(postId.isBlank()){
             throw new BadRequestException("postId cannot be null");
+        }
+    }
+
+    public void validation(String postId, String userId){
+        if(postId.isBlank()){
+            throw new BadRequestException("postId cannot be null");
+        }
+        if(userId.isBlank()){
+            throw new BadRequestException("userId cannot be null");
         }
     }
 }

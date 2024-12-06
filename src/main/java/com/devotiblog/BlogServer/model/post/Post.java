@@ -24,6 +24,5 @@ public class Post {
     String[] likedIds;
 
     // If the post is a response to another post, its parent is stored here
-    Boolean isResponse;
     String parentPostId;
 }
