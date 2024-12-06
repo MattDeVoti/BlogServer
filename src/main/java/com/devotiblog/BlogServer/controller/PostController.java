@@ -22,7 +22,7 @@ public class PostController {
 
     @RequestMapping(method = RequestMethod.DELETE, value="deletePost/{postId}")
     @Operation(summary = "Delete a post", description = "Deletes a post")
-    public DeleteResult createNewPost(@PathVariable String postId){
+    public Post createNewPost(@PathVariable String postId){
         return postsService.delete(postId);
     }
 

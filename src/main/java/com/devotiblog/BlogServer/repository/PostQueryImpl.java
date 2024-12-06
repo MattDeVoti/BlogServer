@@ -24,6 +24,7 @@ public class PostQueryImpl implements PostQuery{
         Query query = new Query(where("postId").is(post.getPostId()));
         Update update = new Update();
         update.set("postBody", post.getPostBody());
+        update.set("posterId", post.getPosterId());
         return mongoTemplate.findAndModify(query, update, new FindAndModifyOptions().returnNew(true), Post.class);
     }
 
